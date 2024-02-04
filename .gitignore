@@ -48,3 +48,4 @@ database/
 uploaded-files/
 *.log
 *.log.*.gz
+node_modules/
