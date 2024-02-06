@@ -38,7 +38,7 @@ const LoginPage: React.FC = () => {
       />
     );
   }
-  const apiHost = process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8080';
+  const apiHost = process.env.REACT_APP_BACKEND_HOST;
   const googleAuthUri = `${apiHost}/oauth2/authorize/google?redirect_uri=${window.location.origin}/oauth2/redirect`;
   const vkAuthUri = `${apiHost}/oauth2/authorize/vk?redirect_uri=${window.location.origin}/oauth2/redirect`;
 

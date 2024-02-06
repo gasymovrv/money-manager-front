@@ -37,7 +37,7 @@ const ProfilePage: React.FC = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const {user, refreshUser} = useContext(AuthContext);
+  const {user} = useContext(AuthContext);
   const {currentAccount} = user;
 
   const [account, setAccount] = useState<Account>(currentAccount);

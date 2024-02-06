@@ -40,12 +40,14 @@ Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
-Add `GENERATE_SOURCEMAP=false` environment variable to remove the source map, or change the build script in package-json:
+Add `GENERATE_SOURCEMAP=false` environment variable (or .env) to remove the source map, or change the build script in package-json:
 ```
 "build": "GENERATE_SOURCEMAP=false react-scripts build",
 "win-build": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build"
 ```
 Your app is ready to be deployed!
+
+You can test it on local server by command `serve -s build`
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 

@@ -15,8 +15,8 @@ export function getFileName(response: Response, defaultName: string = 'unknown-f
     return defaultName;
   }
 
-  const utf8FilenameRegex: RegExp = /filename\*=UTF-8''([\w%\-\.]+)(?:; ?|$)/i;
-  const asciiFilenameRegex = /^filename=(["']?)(.*?[^\\])\1(?:; ?|$)/i;
+  const utf8FilenameRegex: RegExp = /filename\*=UTF-8''([\w%\-.]+)(?:; ?|$)/i;
+  const asciiFilenameRegex: RegExp = /^filename=(["']?)(.*?[^\\])\1(?:; ?|$)/i;
 
   let fileName: string = defaultName;
   if (utf8FilenameRegex.test(contentDisposition)) {

@@ -8,7 +8,7 @@ import { SavingResponse, SavingSearchRequestParams, SavingSearchResult } from '.
 import { buildHeaders, buildHeadersJson, downloadFile, getFileName, handleErrors } from '../helpers/api.helper';
 import { ACCESS_TOKEN } from '../constants';
 
-const apiUrl = '/api/';
+const apiUrl = process.env.REACT_APP_BACKEND_HOST + '/api/';
 
 export async function getVersion(): Promise<string> {
   const response = handleErrors(await fetch(apiUrl + 'version'));

@@ -31,7 +31,7 @@ const AddOperationDialog: React.FC<DialogProps & AddOperationProps> = ({
   const savingsFilter = getSavingsFilter(accountId, savingsFilterMap);
 
   const [value, setValue] = useState<number>(draft ? draft.value : 100);
-  const [description, setDescription] = useState<string>(draft && draft.description || '');
+  const [description, setDescription] = useState<string>((draft && draft.description) || '');
   const [categoryId, setCategoryId] = useState<number>(
     draft ? draft.category.id
       : (categories && categories.length ? categories[0].id : 0));
@@ -82,7 +82,7 @@ const AddOperationDialog: React.FC<DialogProps & AddOperationProps> = ({
 
   const handleCancel = async () => {
     setValue(draft ? draft.value : 100);
-    setDescription(draft && draft.description || '');
+    setDescription((draft && draft.description) || '');
     setCategoryId(draft ? draft.category.id
       : (categories && categories.length ? categories[0].id : 0));
     setDate(draft ? moment(draft.date) : moment());
