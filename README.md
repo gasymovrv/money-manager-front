@@ -1,6 +1,21 @@
-# Getting Started with Create React App
+# Money-Manager (frontend)
+The main purpose of the application is to manage income, expenses and savings.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+It is a single page frontend application bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+Material-UI components are used for styling.
+
+Redux is used to store global state in memory and some custom UI configurations in local storage.
+
+No class components, only functional ones with React Hooks.
+
+Core technologies:
++ TypeScript 
++ React 17.0.2 
++ Material-UI 4.11.1 
++ Redux
++ NodeJS
++ NPM
 
 ## Available Scripts
 
