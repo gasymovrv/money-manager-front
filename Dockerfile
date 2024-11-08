@@ -11,6 +11,7 @@ COPY src ./src
 COPY public ./public
 RUN npm install
 
+# This env only for build image step because we have static app
 ENV REACT_APP_BACKEND_HOST $REACT_APP_BACKEND_HOST
 ENV GENERATE_SOURCEMAP $GENERATE_SOURCEMAP
 ENV NODE_ENV $NODE_ENV
