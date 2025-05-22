@@ -17,6 +17,7 @@ import { SavingFieldToSort, SavingsFilterParams, SavingsFilterParamsMap } from '
 import { DATE_FORMAT, SELECT_ALL_OPTION } from '../../constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeFilter, resetFilter } from '../../actions/savings-filter.actions';
+import { changePagination } from '../../actions/pagination.actions';
 import moment from 'moment/moment';
 import { MainTableState } from '../../interfaces/main-table.interface';
 import { OperationCategory } from '../../interfaces/operation.interface';
@@ -57,10 +58,17 @@ const SavingsFilter: React.FC = () => {
   const {incomeCategories, expenseCategories}: MainTableState = useSelector(({mainTable}: any) => mainTable);
   const savingsFilterMap: SavingsFilterParamsMap = useSelector(({savingsFilterMap}: any) => savingsFilterMap);
   const savingsFilter = getSavingsFilter(accountId, savingsFilterMap);
+  const pagination = useSelector(({pagination}: any) => pagination[accountId] || { page: 0, pageSize: 100 });
 
   const dispatch = useDispatch();
-  const change = (activeFilter: SavingsFilterParamsMap) => dispatch(changeFilter(activeFilter))
-  const reset = () => dispatch(resetFilter())
+  const change = (activeFilter: SavingsFilterParamsMap) => {
+    dispatch(changeFilter(activeFilter));
+    dispatch(changePagination(accountId, {page: 0, pageSize: pagination.pageSize}));
+  }
+  const reset = () => {
+    dispatch(resetFilter());
+    dispatch(changePagination(accountId, {page: 0, pageSize: pagination.pageSize}));
+  }
 
   const [searchText, setSearchText] = useState<string | undefined>(savingsFilter.searchText);
   const [selectedIncomeCategories, setSelectedIncomeCategories] = useState<OperationCategory[]>(incomeCategories);
