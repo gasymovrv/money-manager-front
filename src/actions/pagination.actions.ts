@@ -2,18 +2,16 @@ import { CHANGE_PAGINATION, RESET_PAGINATION } from '../constants';
 import { PaginationActionType } from '../interfaces/actions.interface';
 import { PaginationParams } from '../interfaces/main-table.interface';
 
-export const changePagination = (accountId: number, activePaginationOptions: PaginationParams): PaginationActionType => ({
+export const changePagination = (activePaginationOptions: PaginationParams): PaginationActionType => ({
   type: CHANGE_PAGINATION,
   payload: {
-    accountId,
     activePaginationOptions,
   },
 });
 
-export const resetPagination = (accountId: number, pageSize: number): PaginationActionType => ({
+export const resetPagination = (): PaginationActionType => ({
   type: RESET_PAGINATION,
   payload: {
-    accountId,
-    activePaginationOptions: {page: 0, pageSize}
+    activePaginationOptions: {page: 0, pageSize: 100}
   },
 });

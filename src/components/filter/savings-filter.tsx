@@ -58,16 +58,16 @@ const SavingsFilter: React.FC = () => {
   const {incomeCategories, expenseCategories}: MainTableState = useSelector(({mainTable}: any) => mainTable);
   const savingsFilterMap: SavingsFilterParamsMap = useSelector(({savingsFilterMap}: any) => savingsFilterMap);
   const savingsFilter = getSavingsFilter(accountId, savingsFilterMap);
-  const pagination = useSelector(({pagination}: any) => pagination[accountId] || { page: 0, pageSize: 100 });
+  const pagination = useSelector(({pagination}: any) => pagination);
 
   const dispatch = useDispatch();
   const change = (activeFilter: SavingsFilterParamsMap) => {
+    dispatch(changePagination({page: 0, pageSize: pagination.pageSize}));
     dispatch(changeFilter(activeFilter));
-    dispatch(changePagination(accountId, {page: 0, pageSize: pagination.pageSize}));
   }
   const reset = () => {
+    dispatch(changePagination({page: 0, pageSize: pagination.pageSize}));
     dispatch(resetFilter());
-    dispatch(changePagination(accountId, {page: 0, pageSize: pagination.pageSize}));
   }
 
   const [searchText, setSearchText] = useState<string | undefined>(savingsFilter.searchText);

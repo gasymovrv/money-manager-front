@@ -34,15 +34,13 @@ interface ResetFilterAction {
 interface ChangePaginationAction {
   type: typeof CHANGE_PAGINATION,
   payload: {
-    accountId: number,
     activePaginationOptions: PaginationParams,
   }
 }
 
 interface ResetPaginationAction {
-  type: typeof RESET_PAGINATION
+  type: typeof RESET_PAGINATION,
   payload: {
-    accountId: number,
     activePaginationOptions: PaginationParams,
   }
 }

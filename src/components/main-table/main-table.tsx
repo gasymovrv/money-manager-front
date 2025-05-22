@@ -84,7 +84,7 @@ const MainTable: React.FC = () => {
   const savingsFilterMap: SavingsFilterParamsMap = useSelector(({savingsFilterMap}: any) => savingsFilterMap);
   const savingsFilter = getSavingsFilter(accountId, savingsFilterMap);
 
-  const pagination: PaginationParams = useSelector(({pagination}: any) => pagination[accountId] || { page: 0, pageSize: 100 });
+  const pagination: PaginationParams = useSelector(({pagination}: any) => pagination);
   const {
     showExpenseCategories,
     showIncomeCategories
@@ -105,7 +105,7 @@ const MainTable: React.FC = () => {
   });
 
   const dispatch = useDispatch();
-  const changePgnOptions = (pp: PaginationParams) => dispatch(changePagination(accountId, pp));
+  const changePgnOptions = (pp: PaginationParams) => dispatch(changePagination(pp));
   const changeShowCatOptions = (scp: ShowingCategoriesParams) => dispatch(changeShowingCategories(scp));
 
   const [openAddIncomeCategory, setOpenAddIncomeCategory] = useState(false);
