@@ -17,7 +17,7 @@ import {
   Typography
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { AccountCircle } from '@material-ui/icons';
+import { AccountCircle, History as HistoryIcon } from '@material-ui/icons';
 import { AddExpenseDialog, AddIncomeDialog } from '../dialog/add-operation.dialog';
 import { downloadTemplateXlsxFile, exportToXlsxFile } from '../../services/api.service';
 import StyledMenu from '../menu/styled-menu';
@@ -178,6 +178,17 @@ const Header: React.FC<HeaderProps> = ({hasActions, children}) => {
                         open={openAddExpense}
                         handleClose={() => setOpenAddExpense(false)}
                     />
+                </Box>
+
+                <Box>
+                    <Button
+                        variant="outlined"
+                        color="default"
+                        startIcon={<HistoryIcon />}
+                        onClick={() => history.push('/history')}
+                    >
+                        History
+                    </Button>
                 </Box>
 
                 <Box>

@@ -12,6 +12,6 @@ export const changePagination = (activePaginationOptions: PaginationParams): Pag
 export const resetPagination = (): PaginationActionType => ({
   type: RESET_PAGINATION,
   payload: {
-    activePaginationOptions: {page: 0, pageSize: 500}
+    activePaginationOptions: {page: 0, pageSize: 100}
   },
 });

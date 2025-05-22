@@ -4,6 +4,7 @@ import {
   AddOrEditOperationRequest,
   Operation
 } from '../interfaces/operation.interface';
+import { HistoryActionDto, Page } from '../interfaces/history-action.interface';
 import { SavingResponse, SavingSearchRequestParams, SavingSearchResult } from '../interfaces/saving.interface';
 import { buildHeaders, buildHeadersJson, downloadFile, getFileName, handleErrors } from '../helpers/api.helper';
 import { ACCESS_TOKEN } from '../constants';
@@ -22,6 +23,12 @@ export async function getCurrentUser(): Promise<User> {
   const headers = buildHeadersJson();
 
   const response = handleErrors(await fetch(apiUrl + 'users/current', {headers}));
+  return await response.json();
+}
+
+export async function getHistory(page: number, size: number): Promise<Page<HistoryActionDto>> {
+  const headers = buildHeadersJson();
+  const response = handleErrors(await fetch(`${apiUrl}history?page=${page}&size=${size}`, {headers}));
   return await response.json();
 }
 

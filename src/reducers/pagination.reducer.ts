@@ -7,7 +7,7 @@ const state: any = load({states: ['pagination'], namespace: 'money-manager'});
 
 const initialState: PaginationParams = (state && state.pagination) ?
   state.pagination :
-  {page: 0, pageSize: 500};
+  {page: 0, pageSize: 100};
 
 const pagination = (
   state = initialState,

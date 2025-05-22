@@ -10,6 +10,7 @@ import { darkTheme, lightTheme } from './theme';
 import moment from 'moment-timezone';
 import WelcomePage from './pages/welcome.page';
 import ProfilePage from './pages/profile.page';
+import HistoryPage from './pages/history.page';
 import { Theme } from '@material-ui/core/styles';
 import Oauth2RedirectHandler from './components/oauth2/oauth2-redirect-handler';
 import { useEffectCallback } from './helpers/common.helper';
@@ -75,23 +76,40 @@ const App: React.FC = () => {
       <AuthContext.Provider value={context}>
         <Router>
           <Switch>
-            <PrivateRoute path="/" exact isAuthenticated={isAuthenticated} component={
-              (props: any) => {
+            <PrivateRoute 
+              exact 
+              path="/" 
+              isAuthenticated={isAuthenticated} 
+              component={(props: any) => {
                 if (user.currentAccount.isDraft) {
                   return <Redirect to="/welcome"/>;
                 } else {
                   return <HomePage {...props}/>;
                 }
-              }}/>
-            <PrivateRoute path="/welcome" exact isAuthenticated={isAuthenticated} component={
-              (props: any) => {
+              }}
+            />
+            <PrivateRoute 
+              exact 
+              path="/welcome" 
+              isAuthenticated={isAuthenticated} 
+              component={(props: any) => {
                 if (user.currentAccount.isDraft) {
                   return <WelcomePage {...props}/>;
                 } else {
                   return <Redirect to="/"/>;
                 }
-              }}/>
-            <PrivateRoute path="/profile" exact isAuthenticated={isAuthenticated} component={ProfilePage}/>
+              }}
+            />
+            <PrivateRoute 
+              path="/profile" 
+              isAuthenticated={isAuthenticated} 
+              component={ProfilePage}
+            />
+            <PrivateRoute 
+              path="/history" 
+              isAuthenticated={isAuthenticated} 
+              component={HistoryPage}
+            />
             <Route path="/login" component={LoginPage}/>
             <Route path="/oauth2/redirect" component={Oauth2RedirectHandler}/>
             <Route component={LoginPage}/>

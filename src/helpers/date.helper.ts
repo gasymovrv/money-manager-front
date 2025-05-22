@@ -1,6 +1,10 @@
 import moment from 'moment';
 import { Period } from '../interfaces/common.interface';
-import { DATE_FORMAT, MONTH_FORMAT, YEAR_FORMAT } from '../constants';
+import { DATE_FORMAT, MONTH_FORMAT, YEAR_FORMAT, DATE_TIME_FORMAT } from '../constants';
+
+export function formatDateTime(date: any, format: string = DATE_TIME_FORMAT): string {
+  return moment.utc(date).local().format(format);
+}
 
 export function isCurrentPeriod(date: any, period: Period): boolean {
   return formatByPeriod(moment(), period) === formatByPeriod(moment(date), period);
