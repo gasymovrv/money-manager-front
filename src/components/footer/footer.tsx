@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
         </Typography>
       </Box>
       <Box className={classes.boxMargin}>
-        <Link color="inherit" href="https://github.com/gasymovrv/money-manager">
+        <Link color="inherit" href="https://github.com/gasymovrv/money-manager-front">
           <Typography variant="subtitle2">Github</Typography>
         </Link>
       </Box>

@@ -1,7 +1,9 @@
 # Money-Manager (frontend)
 The main purpose of the application is to manage income, expenses and savings.
 
-It is a single page frontend application bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Application is deployed at https://money-manager.ddns.net.
+
+It is a single page frontend application bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Here is a backend part: https://github.com/gasymovrv/money-manager-back
 
 Material-UI components are used for styling.
 
