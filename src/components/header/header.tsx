@@ -181,14 +181,11 @@ const Header: React.FC<HeaderProps> = ({hasActions, children}) => {
                 </Box>
 
                 <Box>
-                    <Button
-                        variant="outlined"
-                        color="default"
-                        startIcon={<HistoryIcon />}
-                        onClick={() => history.push('/history')}
-                    >
-                        History
-                    </Button>
+                    <Tooltip title="History">
+                        <IconButton size="small" onClick={() => history.push('/history')}>
+                            <HistoryIcon />
+                        </IconButton>
+                    </Tooltip>
                 </Box>
 
                 <Box>
