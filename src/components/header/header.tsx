@@ -19,7 +19,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import { AccountCircle, History as HistoryIcon } from '@material-ui/icons';
 import { AddExpenseDialog, AddIncomeDialog } from '../dialog/add-operation.dialog';
-import { downloadTemplateXlsxFile, exportToXlsxFile } from '../../services/api.service';
+import { downloadTemplateXlsxFile, exportToXlsxFile, linkTelegramAccount } from '../../services/api.service';
 import StyledMenu from '../menu/styled-menu';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useHistory } from 'react-router-dom';
@@ -27,6 +27,7 @@ import { useDispatch } from 'react-redux';
 import { showError } from '../../actions/error.actions';
 import { ACCESS_TOKEN, COMMON_ERROR_MSG } from '../../constants';
 import ImportFromFileDialog from '../dialog/import-from-file.dialog';
+import TelegramLoginWidget from '../telegram/telegram-login-widget';
 
 type HeaderProps = {
   hasActions?: boolean,
@@ -111,6 +112,16 @@ const Header: React.FC<HeaderProps> = ({hasActions, children}) => {
   const handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     window.location.assign('/login');
+  };
+
+  const handleTelegramAuth = async (telegramUser: any) => {
+    try {
+      await linkTelegramAccount(telegramUser);
+      console.log('Telegram account linked successfully');
+    } catch (error) {
+      console.error('Failed to link Telegram account:', error);
+      dispatch(showError('Failed to link Telegram account'));
+    }
   };
 
   return (
@@ -198,7 +209,13 @@ const Header: React.FC<HeaderProps> = ({hasActions, children}) => {
             </Box>
         }
 
-        <Box>
+        <Box style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          {user.id && (
+            <TelegramLoginWidget
+              botUsername={process.env.REACT_APP_TELEGRAM_BOT_USERNAME || ''}
+              onAuth={handleTelegramAuth}
+            />
+          )}
           <IconButton aria-label="account" onClick={handleClickOnAccountMenu}>
             <AccountCircle fontSize="large"/>
           </IconButton>
