@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { Box } from '@material-ui/core';
 
 interface TelegramUser {
   id: number;
@@ -55,7 +54,7 @@ const TelegramLoginWidget: React.FC<TelegramLoginWidgetProps> = ({ botUsername, 
     };
   }, [botUsername, onAuth]);
 
-  return <Box ref={containerRef} />;
+  return <div ref={containerRef} />;
 };
 
 export default TelegramLoginWidget;
