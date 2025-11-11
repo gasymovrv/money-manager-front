@@ -118,6 +118,11 @@ const Header: React.FC<HeaderProps> = ({hasActions, children}) => {
     try {
       await linkTelegramAccount(telegramUser);
       console.log('Telegram account linked successfully');
+      const bot = process.env.REACT_APP_TELEGRAM_BOT_USERNAME || '';
+      if (bot) {
+        // Open bot chat after successful linking
+        window.open(`https://t.me/${bot}`, '_blank');
+      }
     } catch (error) {
       console.error('Failed to link Telegram account:', error);
       dispatch(showError('Failed to link Telegram account'));
