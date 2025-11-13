@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { Box, Link, Typography } from '@material-ui/core';
-import { getVersion } from '../../services/api.service';
+import { getVersion, linkTelegramAccount } from '../../services/api.service';
 import { useEffectCallback } from '../../helpers/common.helper';
+import { AuthContext } from '../../interfaces/auth-context.interface';
+import TelegramLoginWidget from '../telegram/telegram-login-widget';
+import { useDispatch } from 'react-redux';
+import { showError } from '../../actions/error.actions';
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -26,6 +30,8 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Footer: React.FC = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const {user} = useContext(AuthContext);
   const [version, setVersion] = useState<string>();
   const [isLoadingVersion, setLoadingVersion] = useState<boolean>(true);
 
@@ -42,6 +48,21 @@ const Footer: React.FC = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(loadVersion, []);
+
+  const handleTelegramAuth = async (telegramUser: any) => {
+    try {
+      await linkTelegramAccount(telegramUser);
+      console.log('Telegram account linked successfully');
+      const bot = process.env.REACT_APP_TELEGRAM_BOT_USERNAME || '';
+      if (bot) {
+        // Open bot chat after successful linking
+        window.open(`https://t.me/${bot}`, '_blank');
+      }
+    } catch (error) {
+      console.error('Failed to link Telegram account:', error);
+      dispatch(showError('Failed to link Telegram account'));
+    }
+  };
 
   return (
     <footer className={classes.root}>
@@ -63,6 +84,17 @@ const Footer: React.FC = () => {
           <Typography variant="subtitle2">Github</Typography>
         </Link>
       </Box>
+      {user.id && (
+        <Box className={classes.boxMargin} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <Typography variant="subtitle2">
+            Telegram Bot:
+          </Typography>
+          <TelegramLoginWidget
+            botUsername={process.env.REACT_APP_TELEGRAM_BOT_USERNAME || ''}
+            onAuth={handleTelegramAuth}
+          />
+        </Box>
+      )}
     </footer>
   )
 }

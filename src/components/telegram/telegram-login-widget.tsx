@@ -36,6 +36,7 @@ const TelegramLoginWidget: React.FC<TelegramLoginWidgetProps> = ({ botUsername, 
     script.src = 'https://telegram.org/js/telegram-widget.js?22';
     script.setAttribute('data-telegram-login', botUsername);
     script.setAttribute('data-size', 'medium');
+    script.setAttribute('data-userpic', 'false');
     script.setAttribute('data-onauth', 'TelegramLoginWidget.dataOnauth(user)');
     script.setAttribute('data-request-access', 'write');
     script.async = true;
