@@ -19,7 +19,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import { AccountCircle, History as HistoryIcon } from '@material-ui/icons';
 import { AddExpenseDialog, AddIncomeDialog } from '../dialog/add-operation.dialog';
-import { downloadTemplateXlsxFile, exportToXlsxFile } from '../../services/api.service';
+import { downloadTemplateXlsxFile, exportToXlsxFile, linkTelegramAccount } from '../../services/api.service';
 import StyledMenu from '../menu/styled-menu';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import { useHistory } from 'react-router-dom';
@@ -181,14 +181,11 @@ const Header: React.FC<HeaderProps> = ({hasActions, children}) => {
                 </Box>
 
                 <Box>
-                    <Button
-                        variant="outlined"
-                        color="default"
-                        startIcon={<HistoryIcon />}
-                        onClick={() => history.push('/history')}
-                    >
-                        History
-                    </Button>
+                    <Tooltip title="History">
+                        <IconButton size="small" onClick={() => history.push('/history')}>
+                            <HistoryIcon />
+                        </IconButton>
+                    </Tooltip>
                 </Box>
 
                 <Box>
@@ -201,7 +198,7 @@ const Header: React.FC<HeaderProps> = ({hasActions, children}) => {
             </Box>
         }
 
-        <Box>
+        <Box style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <IconButton aria-label="account" onClick={handleClickOnAccountMenu}>
             <AccountCircle fontSize="large"/>
           </IconButton>

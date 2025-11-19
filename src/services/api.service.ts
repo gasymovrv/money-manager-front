@@ -296,3 +296,21 @@ export async function downloadTemplateXlsxFile(): Promise<Response> {
       return blob;
     });
 }
+
+export async function linkTelegramAccount(telegramData: any): Promise<Response> {
+  const headers = buildHeadersJson();
+
+  return handleErrors(await fetch(apiUrl + 'telegram/link', {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({
+      id: telegramData.id,
+      firstName: telegramData.first_name,
+      lastName: telegramData.last_name,
+      username: telegramData.username,
+      photoUrl: telegramData.photo_url,
+      authDate: telegramData.auth_date,
+      hash: telegramData.hash
+    }),
+  }));
+}
